@@ -70,6 +70,83 @@ var jsondata = [];
 
 var cluster_statut = false;
 
+
+
+
+//#####################################
+// STREET NAME |  brewery | work house
+//#####################################
+
+
+
+// OXFORD STREET
+svg1.append("text")
+        .attr({"x": 160, "y":90})
+        .attr("font-size",18)
+        .attr("fill","gray")
+        .attr('transform', 'rotate(-10,204,93)')
+        .text("OXFORD STREET");
+// REGENT STREET
+svg1.append("text")
+        .attr({"x": 111, "y":265})
+        .attr("font-size",18)
+        .attr("fill","gray")
+        .attr('transform', 'rotate(-120,165,280)')
+        .text("REGENT STREET");
+
+// BROAD STREET
+svg1.append("text")
+        .attr({"x": 220, "y":240})
+        .attr("font-size",18)
+        .attr("fill","gray")
+        .attr('transform', 'rotate(-30,255,220)')
+        .text("BROAD STREET");
+
+// DEAN STREET
+svg1.append("text")
+        .attr({"x": 350, "y":200})
+        .attr("font-size",18)
+        .attr("fill","gray")
+        .attr('transform', 'rotate(67,430,204)')
+        .text("DEAN STREETT");
+
+// TICHBORNE STREET
+svg1.append("text")
+        .attr({"x": 320, "y":420})
+        .attr("font-size",12)
+        .attr("fill","gray")
+        .text("TICHBORNE STREET");
+
+// CONDUIT STREET
+svg1.append("text")
+        .attr({"x": 12, "y":310})
+        .attr("font-size",12)
+        .attr("fill","gray")
+        .attr('transform', 'rotate(-55,70,297)')
+        .text("CONDUIT STREET");
+
+
+// WORKHOUSE 
+
+svg1.append("text")
+        .attr({"x": 190, "y":190})
+        .attr("font-size",11)
+        .attr("font-weigth","bold")
+        .attr("fill","#992006")
+        .attr('transform', 'rotate(-25,190,180)')
+        .text("WORKHOUSE");
+
+
+// BREWERY
+
+svg1.append("text")
+        .attr({"x": 335, "y":238})
+        .attr("font-size",9)
+        .attr("font-weigth","bold")
+        .attr("fill","#992006")
+        .attr('transform', 'rotate(70,345,202)')
+        .text("BREWERY");
+
     // Map generator
 
     d3.json(url, function(err, data) {
@@ -331,81 +408,6 @@ var label = svg1.append('text')
     });
      */
 
-//#####################################
-// STREET NAME |  brewery | work house
-//#####################################
-
-
-
-// OXFORD STREET
-svg1.append("text")
-        .attr({"x": 160, "y":90})
-        .attr("font-size",18)
-        .attr("fill","gray")
-        .attr('transform', 'rotate(-10,204,93)')
-        .text("OXFORD STREET");
-// REGENT STREET
-svg1.append("text")
-        .attr({"x": 111, "y":265})
-        .attr("font-size",18)
-        .attr("fill","gray")
-        .attr('transform', 'rotate(-120,165,280)')
-        .text("REGENT STREET");
-
-// BROAD STREET
-svg1.append("text")
-        .attr({"x": 220, "y":240})
-        .attr("font-size",18)
-        .attr("fill","gray")
-        .attr('transform', 'rotate(-30,255,220)')
-        .text("BROAD STREET");
-
-// DEAN STREET
-svg1.append("text")
-        .attr({"x": 350, "y":200})
-        .attr("font-size",18)
-        .attr("fill","gray")
-        .attr('transform', 'rotate(67,430,204)')
-        .text("DEAN STREETT");
-
-// TICHBORNE STREET
-svg1.append("text")
-        .attr({"x": 320, "y":420})
-        .attr("font-size",12)
-        .attr("fill","gray")
-        .text("TICHBORNE STREET");
-
-// CONDUIT STREET
-svg1.append("text")
-        .attr({"x": 12, "y":310})
-        .attr("font-size",12)
-        .attr("fill","gray")
-        .attr('transform', 'rotate(-55,70,297)')
-        .text("CONDUIT STREET");
-
-
-// WORKHOUSE 
-
-svg1.append("text")
-        .attr({"x": 190, "y":190})
-        .attr("font-size",11)
-        .attr("font-weigth","bold")
-        .attr("fill","#992006")
-        .attr('transform', 'rotate(-25,190,180)')
-        .text("WORKHOUSE");
-
-
-// BREWERY
-
-svg1.append("text")
-        .attr({"x": 335, "y":238})
-        .attr("font-size",9)
-        .attr("font-weigth","bold")
-        .attr("fill","#992006")
-        .attr('transform', 'rotate(70,345,202)')
-        .text("BREWERY");
-
-
 // Legend Timeline
 svg3.append("text")
         .attr({"x": 250, "y":585})
@@ -588,7 +590,7 @@ d3.csv(url4, function(error, data) {
                 
             })
             .on('mouseout',function(){
-                d3.select(this).attr('fill','blue')
+                d3.select(this).attr('fill','#119AFB')
                 d3.select("svg").selectAll("circle").remove();
                 pointposition()
                 
@@ -926,7 +928,7 @@ svg2.append("text")
         .attr("width", 40)
         .attr("height",countfemale)
         .attr('stroke', 'red')
-        .attr('fill', 'red')
+        .attr('fill', '#FB11DA')
         .on('mouseenter',function(){
 
         svg1.selectAll("circle").remove()
