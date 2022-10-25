@@ -20,7 +20,7 @@
 
 <script>
 
-document.body.style.zoom = "77%";
+document.body.style.zoom = "80%";
 
 function onZoom() {
         svg1.attr('transform', 'translate(' + d3.event.translate + ')' +
@@ -590,7 +590,7 @@ d3.csv(url4, function(error, data) {
                 
             })
             .on('mouseout',function(){
-                d3.select(this).attr('fill','#119AFB')
+                d3.select(this).attr('fill','blue')
                 d3.select("svg").selectAll("circle").remove();
                 pointposition()
                 
@@ -812,7 +812,7 @@ d3.csv(url4, function(error, data) {
         .attr("width", 40)
         .attr("height",countmale)
         .attr('stroke', 'blue')
-        .attr('fill', 'blue')
+        .attr('fill', '#119AFB')
         .on('mouseenter',function(){
         svg1.selectAll("circle").remove()
 
