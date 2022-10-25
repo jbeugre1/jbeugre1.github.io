@@ -1,0 +1,73 @@
+<html>
+
+<head>
+<title> Project 1</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+<h1> My Header 1 </h1>
+
+<svg width="1500" height="1000" style="border: solid;">
+
+
+
+</svg>
+
+<script>
+    const xvalue = [];
+    var url = "http://127.0.0.1:8887/streets.json";
+
+    var jsondata = [];
+    d3.json(url, function(err, data) {
+        jsondata = data ;
+
+    for (var x = 0; x< jsondata.length ;x++){
+        var con = "";
+        for (var y = 0; y < jsondata[x].length; y++){
+            if(y+1 != jsondata[x].length){
+                con = con + (jsondata[x][y].x *30 ) + "," + (jsondata[x][y].y *-30 +600) + ", " ;
+                
+            }
+            else{
+                con = con + (jsondata[x][y].x *30 ) + "," + (jsondata[x][y].y *-30 +600) ;
+                
+            }
+
+            
+            
+            
+        }
+        d3.select("svg").append("polyline")
+        .style("stroke", "black")  // colour the line
+        .style("fill", "none")  
+        .attr('points', con)
+        
+
+
+        
+       
+
+    }
+
+
+
+    });
+        
+
+    
+
+    
+   
+    
+
+
+
+</script>
+
+
+</body>
+
+
+
+</html>

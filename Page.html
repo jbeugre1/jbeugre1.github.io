@@ -1,0 +1,364 @@
+<html>
+
+<head>
+<title> Project 1</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+<h1> My Header 1 </h1>
+
+<svg width="1500" height="1000" style="border: solid;">
+
+    <!-- X and Y Axix -->
+
+    <line x1="600" y1="500" x2="1600" y2="500" style="stroke:rgb(0, 0, 0);stroke-width:2" />
+    <line x1="600" y1="500" x2="600" y2="20" style="stroke:rgb(0, 0, 0);stroke-width:2" />
+
+
+    <rect x = 700 y=700 height=200 width=400 style="fill:rgb(160, 160, 160);stroke:rgb(0, 0, 0);stroke-width:5;fill-opacity:1;stroke-opacity:0.9"/>
+    <text x=750 y=780 id="age">Age:</text> 
+    <text x=750 y=800 id="gender">Gender:</text> 
+
+
+</svg>
+
+<script>
+
+
+    const xvalue = [];
+    var url = "http://127.0.0.1:8887/streets.json";
+
+    var jsondata = [];
+
+    // Map generator
+
+    d3.json(url, function(err, data) {
+        jsondata = data ;
+
+    for (var x = 0; x< jsondata.length ;x++){
+        var con = "";
+        for (var y = 0; y < jsondata[x].length; y++){
+            if(y+1 != jsondata[x].length){
+                con = con +jsondata[x][y].x *25 + "," + jsondata[x][y].y *25 + ", " ;
+                
+            }
+            else{
+                con = con +jsondata[x][y].x *25 + "," + jsondata[x][y].y *25;
+                
+            }
+
+            
+            
+            
+        }
+        d3.select("svg").append("polyline")
+        .style("stroke", "black")  // colour the line
+        .style("fill", "none")  
+        .attr('points', con)
+        
+
+
+        
+       
+
+    }
+
+
+
+    });
+
+    //  Bar Chart
+    var url2 = "http://127.0.0.1:8887/deathdays.csv";
+
+    d3.csv(url2, function(error, data) {
+        
+
+        for (var i = 0; i<data.length; i++){
+
+            d3.select("svg").append('rect')
+            .attr('id',i)
+            .attr('x',603 + (i*21) )
+            .attr('y',498 - data[i].deaths * 3 )
+            .attr('width',18 )
+            .attr('height',data[i].deaths * 3 )
+            .attr('fill', "rgb(0,0,255)")
+            .on('mouseenter',function(){
+                d3.select(this).attr('fill','red');
+                d3.select("svg").selectAll("circle").remove();
+                
+
+                var deathid = d3.select(this).attr('id');
+                var num = 0;
+                for (var j=0; j<= deathid;j++){
+                    num = num + parseInt(data[j].deaths)
+                }
+                console.log(deathid +" "+ num);
+
+                d3.csv(url3, function(error, data) {
+        
+
+                for (var i = 0; i<num; i++){
+                    if (data[i].gender == 0){
+                        d3.select("svg").append('circle')
+                        .attr("cx",data[i].x * 25)
+                        .attr("cy",data[i].y * 25)
+                        .attr("r",2)
+                        .style('fill','blue');
+
+                    }
+                    else{
+                        d3.select("svg").append('circle')
+                        .attr("cx",data[i].x * 25)
+                        .attr("cy",data[i].y * 25)
+                        .attr("r",2)
+                        .style('fill','red');
+
+                        
+                    }
+                    
+                }
+                });
+
+
+
+                
+                
+            })
+            .on('mouseout',function(){
+                d3.select(this).attr('fill','blue')
+                d3.select("svg").selectAll("circle").remove();
+
+                d3.csv(url3, function(error, data) {
+        
+
+                for (var i = 0; i<data.length; i++){
+                    if (data[i].gender == 0){
+                        d3.select("svg").append('circle')
+                        .attr("cx",data[i].x * 25)
+                        .attr("cy",data[i].y * 25)
+                        .attr("r",2)
+                        .attr("id",i)
+                        .style('fill','blue')
+                        .on('mouseenter',function(){
+               
+                        var idd = d3.select(this).attr('id')
+                        console.log(idd);
+                        
+                        d3.select("svg").select("#age").text("Age: "+data[idd].age )
+                        d3.select("svg").select("#gender").text("Gender: Male" )
+
+                        })
+                        
+                        .on('mouseout',function(){
+                        d3.select("svg").select("#age").text("Age:" )
+                        d3.select("svg").select("#gender").text("Gender:" )
+
+                        })
+                        ;
+                        
+                    }
+                    else{
+                        d3.select("svg").append('circle')
+                        .attr("cx",data[i].x * 25)
+                        .attr("cy",data[i].y * 25)
+                        .attr("r",2)
+                        .attr("id",i)
+                        .style('fill','red')
+                        .on('mouseenter',function(){
+               
+                        var idd = d3.select(this).attr('id')
+                        console.log(idd);
+                        
+                        d3.select("svg").select("#age").text("Age: "+data[idd].age )
+                        d3.select("svg").select("#gender").text("Gender: Female" )
+
+                        })
+                        
+                        .on('mouseout',function(){
+                        d3.select("svg").select("#age").text("Age:" )
+                        d3.select("svg").select("#gender").text("Gender:" )
+
+                        }) 
+                        ;
+                    }
+            
+
+
+
+
+
+                }
+                });
+
+
+            });
+
+           
+        }
+        
+      
+      
+    });
+
+    
+
+// Point Gender  and position
+    var url3 = "http://127.0.0.1:8887/deaths_age_sex.csv";
+
+    d3.csv(url3, function(error, data) {
+        
+
+        for (var i = 0; i<data.length; i++){
+            if (data[i].gender == 0){
+                d3.select("svg").append('circle')
+                .attr("cx",data[i].x * 25)
+                .attr("cy",data[i].y * 25)
+                .attr("r",2)
+                .attr("id",i)
+                .style('fill','blue')
+                .on('mouseenter',function(){
+               
+                var idd = d3.select(this).attr('id')
+                console.log(idd);
+                
+                d3.select("svg").select("#age").text("Age: "+data[idd].age )
+                d3.select("svg").select("#gender").text("Gender: Male" )
+
+                })
+                
+                .on('mouseout',function(){
+                d3.select("svg").select("#age").text("Age:" )
+                d3.select("svg").select("#gender").text("Gender:" )
+
+                })
+                ;
+                
+                
+
+            }
+            else{
+                d3.select("svg").append('circle')
+                .attr("cx",data[i].x * 25)
+                .attr("cy",data[i].y * 25)
+                .attr("r",2)
+                .attr("id",i)
+                .style('fill','red')
+                .on('mouseenter',function(){
+               
+                var idd = d3.select(this).attr('id')
+                console.log(idd);
+               
+                d3.select("svg").select("#age").text("Age: "+data[idd].age )
+                d3.select("svg").select("#gender").text("Gender: Female" )
+
+               })
+               
+               .on('mouseout',function(){
+               d3.select("svg").select("#age").text("Age:" )
+               d3.select("svg").select("#gender").text("Gender:" )
+
+               })
+               ;
+            }
+            
+
+
+
+
+
+    }
+});
+
+var url4 = "http://127.0.0.1:8887/pumps.csv";
+
+  
+    
+    d3.csv(url4, function(error, data) {
+        console.log(data[1]);
+        
+        for (var i = 0; i< data.length ;i++){
+
+            d3.select("svg").append("rect")
+            .attr("x",data[i].x *25)
+            .attr("y",data[i].y *25)
+            .attr("width",7)
+            .attr("height",7)
+            .attr('stroke', 'black')
+            .attr('fill', '#69a3b2');
+
+        }
+
+        
+
+    
+    });
+// X tick
+
+    for (var i=0; i<42; i++){
+        d3.select('svg').append("line")
+        .attr("x1",611 + (i*21))
+        .attr("x2",611 + (i*21))
+        .attr("y1",500)
+        .attr("y2",505)
+        .attr("stroke","rgb(0, 0, 0)")
+        .attr("stroke-width",2);
+
+    }
+
+// Y ticks
+    for (var i=0; i<20; i++){
+        d3.select('svg').append("line")
+        .attr("x1",595)
+        .attr("x2",600)
+        .attr("y1",500 - (i*25))
+        .attr("y2",500 - (i*25))
+        .attr("stroke","rgb(0, 0, 0)")
+        .attr("stroke-width",2);
+
+    }
+
+// Y axis name
+    for (var i=0; i<20; i++){
+        d3.select("svg")
+        .append("text")
+        .attr({"x": 570, "y": 505 -(i*25)})
+        .text(i*5);
+
+    }
+
+var url5 = "http://127.0.0.1:8887/deathdays.csv";
+ 
+d3.csv(url5, function(error, data) {
+
+    for(var x=0; x< data.length;x++){
+        d3.select("svg")
+        .append("text")
+        .attr({"x": 607 + (x*21), "y": 555})
+        .attr('transform', 'rotate(-75,' + (607 + (x*21)) +',555)')
+        .text(data[x].date);
+    
+    }
+    
+
+
+});
+    
+        
+
+    
+
+    
+   
+    
+
+
+
+</script>
+
+
+</body>
+
+
+
+</html>
