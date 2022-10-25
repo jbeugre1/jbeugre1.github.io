@@ -1026,7 +1026,7 @@ console.log("POINTS")
 function Cluster(newevent) {
     
     svg1.selectAll(".grid").remove();
-    svg1.selectAll("text").remove();
+    svg1.selectAll(".clustertext").remove()
     cluster_statut = true;
     
     var svg1width = 500;
@@ -1097,6 +1097,7 @@ function Cluster(newevent) {
         }
         svg1.append("text")
         .attr({"x": ((j*size) + (size/2)) , "y": ((i*size) +  (size/2)) })
+        .attr("class","clustertext")
         .attr("font-size",25)
         .text(death_count)
 
@@ -1112,7 +1113,7 @@ function Cluster(newevent) {
 function Reset(){
 cluster_statut = false
 svg1.selectAll(".grid").remove()
-svg1.selectAll("text").remove()
+svg1.selectAll(".clustertext").remove()
 
 
 }
