@@ -8,7 +8,7 @@
 <body>
 <h1> London's 1854 cholera epidemic </h1>
 <label>Grid Size: </label>
-<input type="range" min="40" max="200" value="0" class="slider" id="myRange" oninput="this.nextElementSibling.value = this.value">
+<input type="range" min="40" max="300" value="0" class="slider" id="myRange" oninput="this.nextElementSibling.value = this.value">
 <output>40</output>
 
 
@@ -19,6 +19,8 @@
 <button onclick="Reset()">Reset</button><br><br>
 
 <script>
+
+document.body.style.zoom = "77%";
 
 function onZoom() {
         svg1.attr('transform', 'translate(' + d3.event.translate + ')' +
@@ -110,6 +112,7 @@ var cluster_statut = false;
         .attr({"x": 50 + (x*21), "y": 555})
         .attr('fill','black')
         .attr('id',"t"+x)
+        .attr("font-size",14)
         .attr('transform', 'rotate(-75,' + (50 + (x*21)) +',555)')
         .text(data[x].date)
         .on("click", function(){
@@ -307,6 +310,7 @@ var cluster_statut = false;
     for (var i=0; i<20; i++){
         svg3.append("text")
         .attr({"x": 25, "y": 505 -(i*25)})
+        .attr("font-size",15)
         .text(i*5);
 
     }
