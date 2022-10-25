@@ -1131,25 +1131,68 @@ svg1.selectAll(".clustertext").remove()
 
 
 svg4.append("rect")
-.attr({"x": 50 , "y": 150})
+.attr({"x": 50 , "y": 50})
 .attr({"height": 200 , "width": 400})
 .attr('stroke', 'black')
 .attr('fill', '#69a3b2');
 
 
 svg4.append("text")
-.attr({"x": 70 , "y": 230})
+.attr({"x": 70 , "y": 120})
 .attr("font-size",23)
 .attr("id","age")
 .text("Age: ")
 
 svg4.append("text")
-.attr({"x": 70 , "y": 280})
+.attr({"x": 70 , "y": 170})
 .attr("font-size",23)
 .attr("id","gender")
 .text("Gender: ")
     
 
+// Legend | Label 
+
+svg4.append("text")
+.attr({"x": 50 , "y": 340})
+.attr("font-size",23)
+.text("Map Legend")
+
+svg4.append("rect")
+    .attr("x", 60)
+    .attr("y",380)
+    .attr("width",20)
+    .attr("height",20)
+    .attr('stroke', 'black')
+    .attr('fill', '#69a3b2');
+
+svg4.append("text")
+    .attr({"x": 90 , "y": 395})
+    .attr("font-size",23)
+    .text("Pump")
+
+svg4.append('circle')
+    .attr("cx",70)
+    .attr("cy",430)
+    .attr("r",10)
+    .style('fill','#119AFB');
+
+
+svg4.append("text")
+    .attr({"x": 90 , "y": 435})
+    .attr("font-size",23)
+    .text("Male")
+
+svg4.append('circle')
+    .attr("cx",70)
+    .attr("cy",470)
+    .attr("r",10)
+    .style('fill','##FB11DA');
+
+svg4.append("text")
+    .attr({"x": 90 , "y": 475})
+    .attr("font-size",23)
+    .text("Female")
+    
     
 </script>
 
