@@ -6,7 +6,8 @@
 </head>
 
 <body>
-<h1> My Header 1 </h1>
+<h1> London's 1854 cholera epidemic </h1>
+<h2> Data Visualization </h2>
 <label>Grid Size: </label>
 <div class="slidecontainer">
     <input type="range" min="40" max="200" value="0" class="slider" id="myRange" oninput="this.nextElementSibling.value = this.value">
@@ -27,7 +28,7 @@ function onZoom() {
     }
 
 var zoomBehavior = d3.behavior.zoom()
-    .scaleExtent([1, 3])
+    .scaleExtent([0.7, 5])
     .on('zoom', onZoom);
 
 
@@ -44,15 +45,17 @@ svg3 = d3.select("body").append("svg")
 .attr("height",600)
 .attr("style","border: solid;");
 
+svg4 = d3.select("body").append("svg")
+.attr("width",500)
+.attr("height",500)
+.attr("style","border: solid;");
+
 svg2 = d3.select("body").append("svg")
 .attr("width",910)
 .attr("height",500)
 .attr("style","border: solid;");
 
-svg4 = d3.select("body").append("svg")
-.attr("width",500)
-.attr("height",500)
-.attr("style","border: solid;");
+
 
 
 var url = "streets.json";
@@ -75,11 +78,11 @@ var cluster_statut = false;
         var con = "";
         for (var y = 0; y < jsondata[x].length; y++){
             if(y+1 != jsondata[x].length){
-                con = con -(jsondata[x][y].x *29 -90) + "," + (jsondata[x][y].y *29 -70) + ", " ;
+                con = con + (jsondata[x][y].x *29 -85) + "," + (-1 * jsondata[x][y].y *29 +570) + ", " ;
                 
             }
             else{
-                con = con -(jsondata[x][y].x *29 -90) + "," + (jsondata[x][y].y *29 -70);
+                con = con + (jsondata[x][y].x *29 -85) + "," + (-1 * jsondata[x][y].y *29 +570);
                 
             }
 
@@ -189,8 +192,8 @@ var cluster_statut = false;
 
                         if (data[i].gender == 0){
                             svg1.append('circle')
-                            .attr("cx",data[i].x * 29 -90)
-                            .attr("cy",data[i].y * 29 -70)
+                            .attr("cx",data[i].x * 29 -85)
+                            .attr("cy",data[i].y * -29 +570)
                             .attr("r",3)
                             .attr("id",i)
                             .style('fill','#119AFB')
@@ -199,14 +202,14 @@ var cluster_statut = false;
                             var idd = d3.select(this).attr('id')
                             console.log(idd);
                             
-                            d3.select("svg").select("#age").text("Age: "+data[idd].age )
-                            d3.select("svg").select("#gender").text("Gender: Male" )
+                            svg4.select("#age").text("Age: "+data[idd].age )
+                            svg4.select("#gender").text("Gender: Male" )
 
                             })
                             
                             .on('mouseout',function(){
-                            d3.select("svg").select("#age").text("Age:" )
-                            d3.select("svg").select("#gender").text("Gender:" )
+                            svg4.select("#age").text("Age:" )
+                            svg4.select("#gender").text("Gender:" )
 
                             })
                             ;
@@ -214,24 +217,25 @@ var cluster_statut = false;
                         }
                         else{
                             svg1.append('circle')
-                            .attr("cx",data[i].x * 29 -90)
-                            .attr("cy",data[i].y * 29 -70)
+                            .attr("cx",data[i].x * 29 -85)
+                            .attr("cy",data[i].y * -29 +570)
                             .attr("r",3)
                             .attr("id",i)
                             .style('fill','#FB11DA')
                             .on('mouseenter',function(){
                 
                             var idd = d3.select(this).attr('id')
+                            console.log(idd);
                             
                             
-                            d3.select("svg").select("#age").text("Age: "+data[idd].age )
-                            d3.select("svg").select("#gender").text("Gender: Female" )
+                            svg4.select("#age").text("Age: "+data[idd].age )
+                            svg4.select("#gender").text("Gender: Female" )
 
                             })
                             
                             .on('mouseout',function(){
-                            d3.select("svg").select("#age").text("Age:" )
-                            d3.select("svg").select("#gender").text("Gender:" )
+                            svg4.select("#age").text("Age:" )
+                            svg4.select("#gender").text("Gender:" )
 
                             }) 
                             ;
@@ -307,6 +311,99 @@ var cluster_statut = false;
         .text(i*5);
 
     }
+  
+
+//#####################################
+// STREET NAME |  brewery | work house
+//#####################################
+
+
+
+var label = svg1.append('text')
+        .attr('x', 15)
+        .attr('y', 15)
+        .text("te");
+
+    // Mouse detection
+    svg1.on('mousemove', function () {
+    var position = d3.mouse(svg1.node());
+    label.text('X=' + position[0] + ' , Y=' + position[1]);
+     
+    });
+// OXFORD STREET
+svg1.append("text")
+        .attr({"x": 160, "y":90})
+        .attr("font-size",18)
+        .attr("fill","gray")
+        .attr('transform', 'rotate(-10,204,93)')
+        .text("OXFORD STREET");
+// REGENT STREET
+svg1.append("text")
+        .attr({"x": 111, "y":265})
+        .attr("font-size",18)
+        .attr("fill","gray")
+        .attr('transform', 'rotate(-120,165,280)')
+        .text("REGENT STREET");
+
+// BROAD STREET
+svg1.append("text")
+        .attr({"x": 220, "y":240})
+        .attr("font-size",18)
+        .attr("fill","gray")
+        .attr('transform', 'rotate(-30,255,220)')
+        .text("BROAD STREET");
+
+// DEAN STREET
+svg1.append("text")
+        .attr({"x": 350, "y":200})
+        .attr("font-size",18)
+        .attr("fill","gray")
+        .attr('transform', 'rotate(67,430,204)')
+        .text("DEAN STREETT");
+
+// TICHBORNE STREET
+svg1.append("text")
+        .attr({"x": 320, "y":420})
+        .attr("font-size",12)
+        .attr("fill","gray")
+        .text("TICHBORNE STREET");
+
+// CONDUIT STREET
+svg1.append("text")
+        .attr({"x": 12, "y":310})
+        .attr("font-size",12)
+        .attr("fill","gray")
+        .attr('transform', 'rotate(-55,70,297)')
+        .text("CONDUIT STREET");
+
+
+// WORKHOUSE 
+
+svg1.append("text")
+        .attr({"x": 190, "y":190})
+        .attr("font-size",11)
+        .attr("font-weigth","bold")
+        .attr("fill","#992006")
+        .attr('transform', 'rotate(-25,190,180)')
+        .text("WORKHOUSE");
+
+
+// BREWERY
+
+svg1.append("text")
+        .attr({"x": 335, "y":238})
+        .attr("font-size",9)
+        .attr("font-weigth","bold")
+        .attr("fill","#992006")
+        .attr('transform', 'rotate(70,345,202)')
+        .text("BREWERY");
+
+
+// Legend Timeline
+svg3.append("text")
+        .attr({"x": 250, "y":585})
+        .attr("font-size",23)
+        .text("Timeline graph of cholera deaths ");
 
     // Point Gender  and position
 function pointposition(){
@@ -316,8 +413,8 @@ function pointposition(){
         for (var i = 0; i<data.length; i++){
             if (data[i].gender == 0){
                 svg1.append('circle')
-                .attr("cx",(data[i].x * 29) -90)
-                .attr("cy",(data[i].y * 29) -70)
+                .attr("cx",data[i].x * 29 -85)
+                .attr("cy",data[i].y * -29 +570)
                 .attr("r",3)
                 .attr("id",i)
                 .style('fill','#119AFB')
@@ -326,14 +423,14 @@ function pointposition(){
                 var idd = d3.select(this).attr('id')
                 console.log(idd);
                 
-                svg1.select("#age").text("Age: "+data[idd].age )
-                svg1.select("#gender").text("Gender: Male" )
+                svg4.select("#age").text("Age: "+data[idd].age )
+                svg4.select("#gender").text("Gender: Male" )
 
                 })
                 
                 .on('mouseout',function(){
-                svg1.select("#age").text("Age:" )
-                svg1.select("#gender").text("Gender:" )
+                svg4.select("#age").text("Age:" )
+                svg4.select("#gender").text("Gender:" )
 
                 })
                 ;
@@ -343,8 +440,8 @@ function pointposition(){
             }
             else{
                 svg1.append('circle')
-                .attr("cx",data[i].x * 29 -90)
-                .attr("cy",data[i].y * 29 -70)
+                .attr("cx",data[i].x * 29 -85)
+                .attr("cy",data[i].y * -29 +570)
                 .attr("r",3)
                 .attr("id",i)
                 .style('fill','#FB11DA')
@@ -353,14 +450,14 @@ function pointposition(){
                 var idd = d3.select(this).attr('id')
                 console.log(idd);
                
-                svg1.select("#age").text("Age: "+data[idd].age )
-                svg1.select("#gender").text("Gender: Female" )
+                svg4.select("#age").text("Age: "+data[idd].age )
+                svg4.select("#gender").text("Gender: Female" )
 
                })
                
                .on('mouseout',function(){
-                svg1.select("#age").text("Age:" )
-                svg1.select("#gender").text("Gender:" )
+                svg4.select("#age").text("Age:" )
+                svg4.select("#gender").text("Gender:" )
 
                })
                ;
@@ -388,8 +485,8 @@ d3.csv(url4, function(error, data) {
         for (var i = 0; i< data.length ;i++){
 
             svg1.append("rect")
-            .attr("x",data[i].x * 29 -90)
-            .attr("y",data[i].y * 29 -70)
+            .attr("x",data[i].x * 29 -85)
+            .attr("y",data[i].y * -29 +570)
             .attr("width",7)
             .attr("height",7)
             .attr('stroke', 'black')
@@ -455,16 +552,16 @@ d3.csv(url4, function(error, data) {
                 for (var i = 0; i<num; i++){
                     if (data[i].gender == 0){
                         svg1.append('circle')
-                        .attr("cx",data[i].x * 29 -90)
-                        .attr("cy",data[i].y * 29 -70)
+                        .attr("cx",data[i].x * 29 -85)
+                        .attr("cy",data[i].y * -29 +570)
                         .attr("r",3)
                         .style('fill','#119AFB');
 
                     }
                     else{
                         svg1.append('circle')
-                        .attr("cx",data[i].x * 29 -90)
-                        .attr("cy",data[i].y * 29 -70)
+                        .attr("cx",data[i].x * 29 -85)
+                        .attr("cy",data[i].y * -29 +570)
                         .attr("r",3)
                         .style('fill','#FB11DA');
 
@@ -567,13 +664,6 @@ d3.csv(url4, function(error, data) {
         .attr('x', 400)
         .attr('y', 600)
         .text("te");
-
-    // Mouse detection
-    svg3.on('mousemove', function () {
-    var position = d3.mouse(svg2.node());
-    label.text('X=' + position[0] + ' , Y=' + position[1]);
-     
-    });
 
 // Axis
     svg2.append("line")
@@ -717,6 +807,9 @@ d3.csv(url4, function(error, data) {
         .on('mouseenter',function(){
         svg1.selectAll("circle").remove()
 
+
+    
+
 //#######
 //Bar chart male
 //######
@@ -724,8 +817,8 @@ d3.csv(url4, function(error, data) {
             for (var i = 0; i<data.length; i++){
                 if (data[i].gender == 0){
                     svg1.append('circle')
-                    .attr("cx",data[i].x * 29 -90)
-                    .attr("cy",data[i].y * 29 -70)
+                    .attr("cx",data[i].x * 29 -85)
+                    .attr("cy",data[i].y * -29 +570)
                     .attr("r",3)
                     .attr("id",i)
                     .style('fill','#119AFB')
@@ -743,6 +836,79 @@ d3.csv(url4, function(error, data) {
         pointposition();
     
     });
+
+
+//#######
+// Legends 
+//#######
+
+// Legend Timeline
+svg2.append("text")
+        .attr({"x": 105, "y":480})
+        .attr("font-size",23)
+        .text("Gender Distribution");
+
+
+svg2.append("text")
+        .attr({"x": 450, "y":480})
+        .attr("font-size",23)
+        .text("Age Distribution");
+
+
+
+
+// Gender Bar
+svg2.append("text")
+    .attr("x",145)
+    .attr("y",430)
+    .text("Male")
+
+svg2.append("text")
+    .attr("x",220)
+    .attr("y",430)
+    .text("Female")
+
+// Age Bar 
+
+
+svg2.append("text")
+    .attr("x",410)
+    .attr("y",450)
+    .attr('transform', 'rotate(-45,410,435)')
+    .text("0-10")
+
+svg2.append("text")
+    .attr("x",455)
+    .attr("y",450)
+    .attr('transform', 'rotate(-45,455,450)')
+    .text("11-20")
+
+svg2.append("text")
+    .attr("x",495)
+    .attr("y",450)
+    .attr('transform', 'rotate(-45,495,450)')
+    .text("21-40")
+
+svg2.append("text")
+    .attr("x",535)
+    .attr("y",450)
+    .attr('transform', 'rotate(-45,535,450)')
+    .text("41-60")
+
+svg2.append("text")
+    .attr("x",575)
+    .attr("y",450)
+    .attr('transform', 'rotate(-45,575,450)')
+    .text("61-80")
+
+svg2.append("text")
+    .attr("x",620)
+    .attr("y",445)
+    .attr('transform', 'rotate(-45,620,445)')
+    .text("> 80")
+
+
+
 
 //#######
 //Bar chart Female
@@ -762,8 +928,8 @@ d3.csv(url4, function(error, data) {
             for (var i = 0; i<data.length; i++){
                 if (data[i].gender == 1){
                     svg1.append('circle')
-                    .attr("cx",data[i].x * 29 -90)
-                    .attr("cy",data[i].y * 29 -70)
+                    .attr("cx",data[i].x * 29 -85)
+                    .attr("cy",data[i].y * -29 +570)
                     .attr("r",3)
                     .attr("id",i)
                     .style('fill','#FB11DA')
@@ -807,16 +973,16 @@ d3.csv(url4, function(error, data) {
             if (data[i].age == number_age){
                 if (data[i].gender == 0){
                     svg1.append('circle')
-                    .attr("cx",data[i].x * 29 -90)
-                    .attr("cy",data[i].y * 29 -70)
+                    .attr("cx",data[i].x * 29 -85)
+                    .attr("cy",data[i].y * -29 +570)
                     .attr("r",3)
                     .style('fill','#119AFB');
             
                 }
                 else{
                     svg1.append('circle')
-                    .attr("cx",data[i].x * 29 -90)
-                    .attr("cy",data[i].y * 29 -70)
+                    .attr("cx",data[i].x * 29 -85)
+                    .attr("cy",data[i].y * -29 +570)
                     .attr("r",3)
                     .style('fill','#FB11DA');
             
@@ -947,27 +1113,29 @@ function Cluster(newevent) {
 
 function Reset(){
 cluster_statut = false
-svg1.selectAll("rect").remove()
+svg1.selectAll(".grid").remove()
 svg1.selectAll("text").remove()
 
 
 }
 
 
+svg4.append("rect")
+.attr({"x": 50 , "y": 50})
+.attr({"height": 200 , "width": 400})
+.attr('stroke', 'black')
+.attr('fill', '#69a3b2');
 
 
+svg4.append("text")
+.attr({"x": 70 , "y": 120})
+.attr("id","age")
+.text("Age: ")
 
-var label = svg1.append('text')
-        .attr('x', 10)
-        .attr('y', 10)
-        .text("te");
-
-    // Mouse detection
-    svg1.on('mousemove', function () {
-    var position = d3.mouse(svg1.node());
-    label.text('X=' + position[0] + ' , Y=' + position[1]);
-    });
-
+svg4.append("text")
+.attr({"x": 70 , "y": 140})
+.attr("id","gender")
+.text("Gender: ")
     
 
     
