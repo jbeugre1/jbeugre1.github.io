@@ -103,7 +103,7 @@ li{
 
 .grid2{
     display: grid;
-    grid-template-columns: 3cm 29cm;
+    grid-template-columns: 3cm 20cm;
     margin-left: 80;
     margin-top: 70;
 }
