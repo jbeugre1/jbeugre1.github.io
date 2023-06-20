@@ -130,36 +130,33 @@ body{
 
 
 
-.content5{
-    position: relative;
-    display: inline-block;
-    margin-top: 80px;
-    margin-left: 150px;
-    margin-right: 150px;
-    margin-bottom: 20px;
-    top: 13cm;
-    
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-   
+.content5 {
+    margin: 80px;
+    margin-top: 520px;
+  }
+
+.content5 p{
+    font-size: 20px;
+}
+  
+  /* Style the grid layout for content5 section */
+.content5-grid {
+    display: grid;
+    grid-template-columns: 11cm 19cm;
+
 }
 
-.content5 p {
-    font-size: 22px;
+.title {
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
-
-.content5 img{
-    float: left;
-    width: 7cm;
+.proj-img{
+    width: 10cm;
     height: 7cm;
-    margin-right: 30px;
 }
-
-.content5 a{
-    font-size: 19px;
-    font-weight: bold;
-}
-.content5 a:hover{
-    color: green;
+.proj-img img{
+    width: 10cm;
+    height: 7cm;
 }
 
 .content6 {
