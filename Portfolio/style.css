@@ -138,6 +138,18 @@ body{
 .content5 p{
     font-size: 20px;
 }
+
+.content5 a{
+    font-size: 18;
+    text-decoration: none;
+
+}
+
+.content5 a:hover{
+    color: green;
+    font-weight: bold;
+    text-decoration: none;
+}
   
   /* Style the grid layout for content5 section */
 .content5-grid {
